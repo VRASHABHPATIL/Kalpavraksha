@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<string.h>
-#include<stdlib.h> //used this beacouse i have used the exit() finction 
 #define max 500
 int oprand[max], vtop = -1, otop = -1; 
 char operator[max]; 
@@ -20,17 +19,17 @@ int popvalue()
     return value;
 }
 
-void pushoprator(char op)
+void pushoprator(char operator1)
 {
 	otop = otop + 1;
-	operator[otop] = op;
+	operator[otop] = operator1;
 }
 
 char popoprator()
 {
-    char op = operator[otop];
+    char operator1 = operator[otop];
     otop = otop - 1;
-    return op;
+    return operator1;
 }
 
 int isDigit(char c)
@@ -102,12 +101,12 @@ int applyoperation(int a, int b, char op)
 	return answer;
 }
 
-void evaluatetop() 
+void evaluateExpression() 
 {
-	int b = popvalue();
-        int a = popvalue();
-        char op = popoprator();
-        pushvalue(applyoperation(a, b, op));
+	int operand2 = popvalue();
+        int operand1 = popvalue();
+        char operator = popoprator();
+        pushvalue(applyoperation(operand1, operand2, operator));
 }
 
 int main() 
@@ -145,7 +144,7 @@ int main()
         	{
             		while (otop!= -1 && precedence(operator[otop]) >= precedence(expression[i])) 
             		{
-                		evaluatetop();
+                		evaluateExpression();
             		}
             		pushoprator(expression[i]);
         	}
@@ -158,7 +157,7 @@ int main()
    	 }
     	while (otop!= -1) 
     	{
-        	evaluatetop();
+        	evaluateExpression();
     	}
     	int result = popvalue();
     	printf("Result: %d", result);
