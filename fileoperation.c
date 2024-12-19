@@ -10,15 +10,29 @@ typedef struct
     int age;
 }User;
 
+int filestatus=0;
+
+int fileStatus(int status)
+{
+	if(status==1)
+	{
+		printf("Error : please chick the file path or permissions to creating or opening the file the file..!");	
+	}
+	return 0;
+
+}
 void create() 
 {
+    	
     FILE *file = fopen(USERS_FILE, "w");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
     }
     fclose(file);
+    
 }
 
 void add() 
@@ -27,7 +41,8 @@ void add()
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
     }
 
     User user;
@@ -40,6 +55,8 @@ void add()
 
     fprintf(file, "%d %s %d\n", user.id, user.name, user.age);
     fclose(file);
+    
+    
 }
 
 void display() 
@@ -48,7 +65,8 @@ void display()
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
     }
 
     User user;
@@ -58,6 +76,7 @@ void display()
         printf("%d\t%s\t%d\n", user.id, user.name, user.age);
     }
     fclose(file);
+    
 }
 
 void update() 
@@ -66,7 +85,9 @@ void update()
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
+        
     }
 
     User user;
@@ -78,7 +99,8 @@ void update()
     if (temp==NULL) 
     {
         printf("error in opening the temp file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
     }
 
     while (fscanf(file, "%d %s %d", &user.id, user.name, &user.age) != EOF) 
@@ -108,6 +130,7 @@ void update()
     {
         printf("user details updated.\n");
     }
+    
 }
 
 void delete() 
@@ -116,7 +139,8 @@ void delete()
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
     }
 
     User user;
@@ -128,7 +152,8 @@ void delete()
     if (temp == NULL) 
     {
         printf("error in opening the temp file!\n");
-        exit(1);
+        filestatus=1;
+        fileStatus(filestatus);
     }
 
     while (fscanf(file, "%d %s %d", &user.id, user.name, &user.age) != EOF) 
@@ -165,6 +190,7 @@ int main() {
 
     while (1) 
     {
+    	int filestatus;
         printf("enter you choice:\n");
         printf("1.add user\n");
         printf("2.display users\n");
@@ -178,6 +204,7 @@ int main() {
         {
             case 1:
                 add();
+                
                 break;
             case 2:
                 display();
