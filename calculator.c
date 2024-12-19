@@ -35,14 +35,13 @@ char popoprator()
 
 int isDigit(char c)
 {
+	int result = 0;
 	if(c>='0' && c<='9')
 	{
-		return 1;
+		result=1;
 	}
-	else
-	{
-		return 0;
-	}
+	return result;
+	
 }
 
 int isoperator(char c)
