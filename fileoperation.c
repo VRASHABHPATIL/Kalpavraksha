@@ -193,7 +193,18 @@ enum ChoiceMenu {
 };
 int main() {
     int choice;
-    create();
+    FILE *file = fopen(USERS_FILE, "r");
+    if (file==NULL) 
+    {
+        printf("error in opening the file!\n");
+        filestatus=1;
+        fileStatus(filestatus);
+    }
+    else
+    {
+    	create();
+    }
+    
 
     while (1) 
     {
