@@ -74,8 +74,20 @@ void add()
     }
     printf("enter user name: ");
     scanf("%s", user.name);
-    printf("enter user age: ");
-    scanf("%d", &user.age);
+
+    while(1)
+    {
+	    printf("enter user age: ");
+	    scanf("%d", &user.age);
+	    if(user.age<=0)
+	    {
+	    	printf("User age can not be null or negative \n");
+	    }
+	    else
+	    {
+	    	break;
+	    }
+    }
 
     fprintf(file, "%d %s %d\n", user.id, user.name, user.age);
     fclose(file);
