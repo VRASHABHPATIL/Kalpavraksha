@@ -1,9 +1,11 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
+#include<stdlib.h> //used this beacouse i have used the exit() finction 
 #define max 500
-int oprand[max], vtop = -1, otop = -1;
+int oprand[max], vtop = -1, otop = -1; 
 char operator[max]; 
+
+// The above global variable can be modified or accessed by any function in the program
 
 void pushvalue(int value)
 {
