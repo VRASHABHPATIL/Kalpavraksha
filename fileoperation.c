@@ -17,8 +17,8 @@ int fileStatus(int status)
 	if(status==1)
 	{
 		printf("Error : please chick the file path or permissions to creating or opening the file the file..!");	
+		exit(0);
 	}
-	return 0;
 
 }
 void create() 
@@ -37,7 +37,7 @@ void create()
 
 void add() 
 {
-    FILE *file = fopen(USERS_FILE, "a");
+    FILE *file = fopen(USERS_FILE, "r+");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
@@ -46,8 +46,32 @@ void add()
     }
 
     User user;
-    printf("enter user id: ");
-    scanf("%d", &user.id);
+    while(1)
+    {
+    	    int found=0;
+	    printf("enter user id: ");
+	    scanf("%d", &user.id);
+	    int id =user.id;
+	    while (fscanf(file, "%d %s %d", &user.id, user.name, &user.age) != EOF) 
+	    {
+	    	if(id==user.id)
+	    	{
+	    		found =1;
+	    	}
+	    }
+	    if(user.id <=0)
+	    {
+	    	printf("User id must be non negative number\n");
+	    }
+	    else if(found==1)
+	    {
+	    	printf("User already exists with this user id\n");
+	    }
+	    else
+	    {
+	    	break;
+	    }
+    }
     printf("enter user name: ");
     scanf("%s", user.name);
     printf("enter user age: ");
@@ -205,7 +229,7 @@ int main() {
     	create();
     }
     
-
+    
     while (1) 
     {
     	int filestatus;
