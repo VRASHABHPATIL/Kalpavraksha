@@ -90,6 +90,7 @@ void add()
     }
 
     fprintf(file, "%d %s %d\n", user.id, user.name, user.age);
+    //all feilds are propperly validated
     fclose(file);
     
     
