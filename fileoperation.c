@@ -74,7 +74,7 @@ void add()
     }
     printf("enter user name: ");
     scanf("%s", user.name);
-
+    //propper user age hangdeling
     while(1)
     {
 	    printf("enter user age: ");
