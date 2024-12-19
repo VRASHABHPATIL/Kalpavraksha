@@ -184,6 +184,13 @@ void delete()
     }
 }
 
+enum ChoiceMenu {
+	Add_User=1,
+	Display_User,
+	Update_User,
+	Delete_User,
+	Exit,
+};
 int main() {
     int choice;
     create();
@@ -202,20 +209,20 @@ int main() {
 
         switch (choice) 
         {
-            case 1:
+            case Add_User:
                 add();
                 
                 break;
-            case 2:
+            case Display_User:
                 display();
                 break;
-            case 3:
+            case Update_User:
                 update();
                 break;
-            case 4:
+            case Delete_User:
                 delete();
                 break;
-            case 5:
+            case Exit:
                 exit(0);
             default:
                 printf("Invalid choice!\n");
