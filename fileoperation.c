@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#define USERS_FILE "users.txt"
+#define TEMP_FILE "temp.txt"
 typedef struct 
 {
     int id;
@@ -11,7 +12,7 @@ typedef struct
 
 void create() 
 {
-    FILE *file = fopen("users.txt", "w");
+    FILE *file = fopen(USERS_FILE, "w");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
@@ -22,7 +23,7 @@ void create()
 
 void add() 
 {
-    FILE *file = fopen("users.txt", "a");
+    FILE *file = fopen(USERS_FILE, "a");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
@@ -43,7 +44,7 @@ void add()
 
 void display() 
 {
-    FILE *file = fopen("users.txt", "r");
+    FILE *file = fopen(USERS_FILE, "r");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
@@ -61,7 +62,7 @@ void display()
 
 void update() 
 {
-    FILE *file = fopen("users.txt", "r");
+    FILE *file = fopen(USERS_FILE, "r");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
@@ -73,7 +74,7 @@ void update()
     printf("enter the userid to be updated: ");
     scanf("%d", &id);
 
-    FILE *temp = fopen("temp.txt", "w");
+    FILE *temp = fopen(TEMP_FILE, "w");
     if (temp==NULL) 
     {
         printf("error in opening the temp file!\n");
@@ -96,8 +97,8 @@ void update()
     fclose(file);
     fclose(temp);
 
-    remove("users.txt");
-    rename("temp.txt", "users.txt");
+    remove(USERS_FILE);
+    rename(TEMP_FILE, USERS_FILE);
 
     if (!found) 
     {
@@ -111,7 +112,7 @@ void update()
 
 void delete() 
 {
-    FILE *file = fopen("users.txt", "r");
+    FILE *file = fopen(USERS_FILE, "r");
     if (file==NULL) 
     {
         printf("error in opening the file!\n");
@@ -123,7 +124,7 @@ void delete()
     printf("enter the user id to be deleted : ");
     scanf("%d", &id);
 
-    FILE *temp = fopen("temp.txt", "w");
+    FILE *temp = fopen(TEMP_FILE, "w");
     if (temp == NULL) 
     {
         printf("error in opening the temp file!\n");
@@ -145,8 +146,8 @@ void delete()
     fclose(file);
     fclose(temp);
 
-    remove("users.txt");
-    rename("temp.txt", "users.txt");
+    remove(USERS_FILE);
+    rename(TEMP_FILE, USERS_FILE);
 
     if (!found) 
     {
