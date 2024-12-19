@@ -46,47 +46,47 @@ int isDigit(char c)
 
 int isoperator(char c)
 {
+	int result =0;
 	if(c=='+' || c=='-' || c=='*' || c=='/')
 	{
-		return 1;
+		result= 1;
 	}
-	else 
-	{
-		return 0;
-	}
+	return result;
 }
 
 int precedence(char op)
 {
+	int result = 0;
 	if(op=='*' || op=='/')
 	{
-		return 2;
+		result = 2;
 	}
 	else if(op=='+' || op=='-')
 	{
-		return 1;
+		result = 1;
 	}
-	else
-	{
-		return 0;
-	}
+	return result;
 }
 
 int applyoperation(int a, int b, char op)
 {
+	int answer=0;
 	switch(op)
 	{
 		case '+':
 		{
-			return a + b;
+			answer= a + b;
+			break;
 		}
 		case '-':
 		{
-			return a - b;
+			answer= a - b;
+			break;
 		}
 		case '*':
 		{
-			return a * b;
+			answer= a * b;
+			break;
 		}
 		case '/':
 		{
@@ -95,10 +95,11 @@ int applyoperation(int a, int b, char op)
 				printf("Division by zero error!");
 				exit(1);
 			}
-			return a / b;
+			answer= a / b;
+			break;
 		}
 	}
-	return 0;
+	return answer;
 }
 
 void evaluatetop() 
