@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define stacksize 1000
+#define stacksize 10000
 void push(int stack[],int *top,int value)
 {
     if(*top==-1)
