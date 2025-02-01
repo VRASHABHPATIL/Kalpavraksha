@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<stdlib.h>
+
 #define stacksize 1000
 void push(int stack[],int *top,int value)
 {
