@@ -45,6 +45,7 @@ int main()
     int n,i;
     char str[100];
     char result[100];
+    char temp[10][100];
     printf("Enter the size of elements :");
     scanf("%d",&n);
     getchar();
@@ -59,27 +60,28 @@ int main()
         if(strcmp(b,str1)==0)
         {
             node n=pop();
-            // char *res;
-
-            // strcpy(res,n.a);
-            // strcat(result,res);
+          
         }
         else
         {
-            //printf("%s\n",b);
-            
             push(b);
         }
         
     }
+    i=0;
     while(top!=-1)
     {
         node n=pop();
-        char *res;
-        strcpy(res,n.a);
-        strcat(result,res);
+        strcpy(temp[i],n.a);
+        i=i+1;
+        
     }
-    printf("%s",result);
+    int size=i;
+    for(i=size-1;i>=0;i--)
+    {
+        printf("%s",temp[i]);
+    }
+    printf("\n");
 
     
 }
