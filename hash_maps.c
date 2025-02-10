@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define TABLE_SIZE 10
 
@@ -9,8 +9,6 @@ typedef struct node
     int value;
     struct node* next;
 } Node;
-
-Node* hash_table[TABLE_SIZE] = {NULL};
 
 Node* createNode(int key, int value)
 {
@@ -26,7 +24,7 @@ int hashFunction(int key)
     return key % TABLE_SIZE;
 }
 
-void insert(int key, int value)
+void insert(Node* hash_table[], int key, int value)
 {
     int hashValue = hashFunction(key);
 
@@ -48,7 +46,7 @@ void insert(int key, int value)
     printf("Insertion successful: (%d, %d)\n", key, value);
 }
 
-int search(int key)
+int search(Node* hash_table[], int key)
 {
     int hashValue = hashFunction(key);
     Node* temp = hash_table[hashValue];
@@ -64,7 +62,7 @@ int search(int key)
     return -1;
 }
 
-void delete(int key)
+void delete(Node* hash_table[], int key)
 {
     int hashValue = hashFunction(key);
 
@@ -101,7 +99,7 @@ void delete(int key)
     printf("Error: Key %d not found for deletion.\n", key);
 }
 
-void display()
+void display(Node* hash_table[])
 {
     printf("\nHash Table:\n");
     for (int i = 0; i < TABLE_SIZE; i++)
@@ -125,8 +123,26 @@ void display()
     }
 }
 
+
+void freeTable(Node* hash_table[])
+{
+    for (int i = 0; i < TABLE_SIZE; i++)
+    {
+        Node* temp = hash_table[i];
+        while (temp != NULL)
+        {
+            Node* toFree = temp;
+            temp = temp->next;
+            free(toFree);
+        }
+    }
+}
+
 int main()
 {
+  
+    Node* hash_table[TABLE_SIZE] = {NULL};
+
     int choice, key, value;
 
     while (1)
@@ -139,10 +155,10 @@ int main()
         printf("5. Exit\n");
         printf("Enter your choice: ");
 
-        if (scanf("%d", &choice) != 1) 
+        if (scanf("%d", &choice) != 1)
         {
             printf("Invalid input. Please enter a number.\n");
-            while(getchar() != '\n'); 
+            while(getchar() != '\n');
             continue;
         }
 
@@ -156,7 +172,7 @@ int main()
                     while(getchar() != '\n');
                     break;
                 }
-                insert(key, value);
+                insert(hash_table, key, value);
                 break;
 
             case 2:
@@ -167,7 +183,7 @@ int main()
                     while(getchar() != '\n');
                     break;
                 }
-                value = search(key);
+                value = search(hash_table, key);
                 if (value == -1)
                 {
                     printf("Key %d not found in the table.\n", key);
@@ -186,15 +202,16 @@ int main()
                     while(getchar() != '\n');
                     break;
                 }
-                delete(key);
+                delete(hash_table, key);
                 break;
 
             case 4:
-                display();
+                display(hash_table);
                 break;
 
             case 5:
                 printf("Exiting program...\n");
+                freeTable(hash_table); 
                 exit(0);
                 break;
 
